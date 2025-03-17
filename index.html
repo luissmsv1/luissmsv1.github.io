@@ -1,0 +1,41 @@
+<img src="" width="500" height="650" style="float: right;" id="imgdb">
+<h1 id="NomePersonagem">...</h1>
+<p>KI: 
+  <span id="ki"></span>
+</p>
+<p>KI maximo:
+ <span id="maxdb"></span>
+</p>
+
+<script>
+
+async function getData() {
+  const url = "https://dragonball-api.com/api/characters/1";
+  try {
+
+
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+
+    const json = await response.json();
+    console.log(json);
+    console.log(json.name);
+    console.log(json.ki);
+    console.log(json.image);
+    console.log(json.maxKi);
+
+    document.getElementById('NomePersonagem').innerText = json.name;
+    document.getElementById('ki').innerText = json.ki;
+    document.getElementById('imgdb').src = json.image;
+    document.getElementById('maxdb').innerText = json.maxKi;
+
+  } catch (error) {
+    console.error(error.message);
+  }
+}
+
+getData ();
+
+</script>
